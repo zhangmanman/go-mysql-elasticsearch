@@ -228,3 +228,10 @@ If you like the project and want to buy me a cola, you can through:
 go-mysql-elasticsearch is still in development, and we will try to use it in production later. Any feedback is very welcome.
 
 Email: siddontang@gmail.com
+
+## 采坑
+#### dump问题
+如果有多个schema，那么会全量的dump整个db,如果是单个schema，可以dump指定的table,这是已知的不足之处
+#### 部署在同一个机器上的问题
+不同的进程需要修改river.toml上的server_id字段，不然两个slave的server_id一样，同步会有问题
+
