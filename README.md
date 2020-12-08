@@ -235,3 +235,7 @@ Email: siddontang@gmail.com
 #### 部署在同一个机器上的问题
 不同的进程需要修改river.toml上的server_id字段，不然两个slave的server_id一样，同步会有问题
 
+## 业务逻辑理解
+canal.go的方法RunFrom是监听binlog日志，有数据时放到一个数组中
+
+syncLoop有定时任务，从数组读数据，或者binlog有数据会发送通道信息，从canal.go的数组中获取数据，放到自己的数组中，当数组大小超过一定数量时，就flush到es，或者如果binlog通过通道信息同步表明一定要写入时，也是会直接flush
